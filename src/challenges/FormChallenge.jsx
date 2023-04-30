@@ -21,9 +21,13 @@ const FormChallenge = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    formData.password === formData.confirmPass
-      ? console.log('Successfully signed up')
-      : console.log("Passwords don't match")
+
+    if(formData.password === formData.confirmPass) {
+      console.log('Successfully signed up')
+    }
+    else {
+      return console.log("Passwords don't match")
+    }
 
     if (formData.newsLetter) console.log('Thanks for sigining up for our newsleetter')
   }
