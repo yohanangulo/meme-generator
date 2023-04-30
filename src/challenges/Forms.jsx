@@ -6,6 +6,7 @@ const initialFullNameState = {
   email: '',
   comments: 'This is a textarea',
   isFriendy: true,
+  status: ''
 }
 
 const Forms = () => {
@@ -15,8 +16,10 @@ const Forms = () => {
   
   const handleChange = e => {
     const {name, value, type, checked} = e.target
+    console.log(e.target.value)
 
-    setFirstname(prevState => ({...prevState, [name] : type === 'text' ? value : checked}))    
+
+    setFirstname(prevState => ({...prevState, [name] : type === 'text' || type === 'radio'  ? value : checked}))    
   }
 
   
@@ -29,14 +32,14 @@ const Forms = () => {
           className="indent-2"
           type="text"
           placeholder="Firstname"
-          name='firstName'
+          name="firstName"
         />
         <input
           onChange={handleChange}
           placeholder="lastName"
           className="indent-2"
           type="text"
-          name='lastName'
+          name="lastName"
           value={formData.lastName}
         />
         <input
@@ -44,7 +47,7 @@ const Forms = () => {
           placeholder="email"
           className="indent-2"
           onChange={handleChange}
-          name='email'
+          name="email"
           value={formData.email}
         />
         <textarea
@@ -53,8 +56,8 @@ const Forms = () => {
           rows="10"
           value={formData.comments}
           onChange={handleChange}
-          name="comments" 
-          style={{ outline: '1px solid black' }}
+          name="comments"
+          style={{ outline: "1px solid black" }}
         />
         <div>
           <input
@@ -67,22 +70,47 @@ const Forms = () => {
           />
           <label htmlFor="friendly">Are you friendly?</label>
         </div>
+
         <fieldset className="text-left">
           <legend className="font-bold mb-4">Current employment status</legend>
 
-          <input type="radio" id="unemployed" className="mr-2" name='status'/>
-          <label htmlFor="unemployed" >Unemployed</label>
+          <input
+            type="radio"
+            id="unemployed"
+            className="mr-2"
+            name="status"
+            onChange={handleChange}
+            value="unemployed"
+            checked={formData.status === 'unemployed'}
+          />
+          <label htmlFor="unemployed">Unemployed</label>
           <br />
 
-          <input type="radio" id="part-time" className="mr-2" name='status'/>
-          <label htmlFor="part-time" >Part-time</label>
+          <input
+            type="radio"
+            id="part-time"
+            className="mr-2"
+            name="status"
+            onChange={handleChange}
+            value="part-time"
+            checked={formData.status === "part-time"}
+          />
+          <label htmlFor="part-time">Part-time</label>
           <br />
 
-          <input type="radio" id="full-time" className="mr-2" name='status'/>
-          <label htmlFor="full-time" >Full-time</label>
+          <input
+            type="radio"
+            id="full-time"
+            className="mr-2"
+            name="status"
+            onChange={handleChange}
+            value="full-time"
+            checked={formData.status === "full-time"}
+          />
+          <label htmlFor="full-time">Full-time</label>
         </fieldset>
       </form>
     </div>
-  )
+  );
 }
 export default Forms
