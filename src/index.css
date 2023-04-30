@@ -1,0 +1,16 @@
+* {
+  font-family: 'Karla', sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.absolute {
+  transform: translateX(-50%);
+}
+
+.favorite-star {
+  filter: invert(82%) sepia(31%) saturate(7291%) hue-rotate(4deg) brightness(110%) contrast(101%);
+}
