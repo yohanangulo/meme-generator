@@ -4,7 +4,8 @@ const initialFullNameState = {
   firstName: '',
   lastName: '',
   email: '',
-  comments: 'This is a textarea'
+  comments: 'This is a textarea',
+  isFriendy: true,
 }
 
 const Forms = () => {
@@ -13,11 +14,11 @@ const Forms = () => {
 
   
   const handleChange = e => {
-    setFirstname(prevState => ({...prevState, [e.target.name] : e.target.value}))    
-    console.log(e.target.name)
+    const {name, value, type, checked} = e.target
+
+    setFirstname(prevState => ({...prevState, [name] : type === 'text' ? value : checked}))    
   }
 
-  console.log(formData)
   
   return (
     <div className="py-16">
@@ -55,6 +56,31 @@ const Forms = () => {
           name="comments" 
           style={{ outline: '1px solid black' }}
         />
+        <div>
+          <input
+            type="checkbox"
+            id="friendly"
+            className="mr-2"
+            name="isFriendy"
+            checked={formData.isFriendy}
+            onChange={handleChange}
+          />
+          <label htmlFor="friendly">Are you friendly?</label>
+        </div>
+        <fieldset className="text-left">
+          <legend className="font-bold mb-4">Current employment status</legend>
+
+          <input type="radio" id="unemployed" className="mr-2" name='status'/>
+          <label htmlFor="unemployed" >Unemployed</label>
+          <br />
+
+          <input type="radio" id="part-time" className="mr-2" name='status'/>
+          <label htmlFor="part-time" >Part-time</label>
+          <br />
+
+          <input type="radio" id="full-time" className="mr-2" name='status'/>
+          <label htmlFor="full-time" >Full-time</label>
+        </fieldset>
       </form>
     </div>
   )
