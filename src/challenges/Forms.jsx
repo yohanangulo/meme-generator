@@ -1,31 +1,37 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const initialFullNameState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  comments: 'This is a textarea',
+  firstName: "",
+  lastName: "",
+  email: "",
+  comments: "This is a textarea",
   isFriendy: true,
-  status: ''
-}
+  status: "",
+  favColor: "",
+};
 
 const Forms = () => {
+  const [formData, setFirstname] = useState(initialFullNameState);
 
-  const [formData, setFirstname] = useState(initialFullNameState)
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    console.log(e.target.value);
 
-  
-  const handleChange = e => {
-    const {name, value, type, checked} = e.target
-    console.log(e.target.value)
+    setFirstname((prevState) => ({
+      ...prevState,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
-
-    setFirstname(prevState => ({...prevState, [name] : type === 'text' || type === 'radio'  ? value : checked}))    
+  const handleSubmit = e => {
+    e.preventDefault()
   }
 
-  
   return (
     <div className="py-16">
-      <form className="text-center flex flex-col max-w-xl mx-auto gap-8 px-8">
+      <form className="text-center flex flex-col max-w-xl mx-auto gap-8 px-8"
+        onSubmit={handleSubmit}
+      >
         <input
           onChange={handleChange}
           value={formData.firstName}
@@ -81,7 +87,7 @@ const Forms = () => {
             name="status"
             onChange={handleChange}
             value="unemployed"
-            checked={formData.status === 'unemployed'}
+            checked={formData.status === "unemployed"}
           />
           <label htmlFor="unemployed">Unemployed</label>
           <br />
@@ -109,8 +115,21 @@ const Forms = () => {
           />
           <label htmlFor="full-time">Full-time</label>
         </fieldset>
+        <select
+          name="favColor"
+          className="px-4 py-2"
+          value={formData.favColor}
+          onChange={handleChange}
+        >
+          <option value="">-- Chosse a color --</option>
+          <option value="green">Green</option>
+          <option value="yellow">Yellow</option>
+          <option value="black">black</option>
+          <option value="blue">Blue</option>
+        </select>
+        <button className="py-2 text-white">Submit</button>
       </form>
     </div>
   );
-}
-export default Forms
+};
+export default Forms;
